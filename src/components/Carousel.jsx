@@ -1,11 +1,12 @@
-// components/Carousel.jsx
 import { useState, useRef, useEffect } from 'react';
 import RideCard from './RideCard';
 
 const Carousel = ({ items }) => {
+  // State and refs at the top for readability
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
 
+  // Update carousel transform on index change
   useEffect(() => {
     const carousel = carouselRef.current;
     if (carousel) {
@@ -14,7 +15,8 @@ const Carousel = ({ items }) => {
   }, [currentIndex]);
 
   return (
-    <div className="relative overflow-hidden h-full"> {/* Ensure height is 100% of parent */}
+    <div className="relative overflow-hidden h-full">
+      {/* Carousel Container */}
       <div ref={carouselRef} className="flex transition-transform duration-300 ease-in-out">
         {items.map((item, index) => (
           <div key={index} className="w-full flex-shrink-0">
@@ -22,6 +24,8 @@ const Carousel = ({ items }) => {
           </div>
         ))}
       </div>
+
+      {/* Pagination Dots */}
       <div className="absolute left-4 top-1/4 flex flex-col space-y-2">
         {items.map((_, index) => (
           <div
